@@ -185,101 +185,101 @@ export function ProjectorManager() {
   const aspectRatio = (imageWidth / imageHeight).toFixed(2);
 
   return (
-    <div className="h-screen flex flex-col bg-[#2a2a2a] max-w-sm mx-auto">
+    <div className="h-screen flex flex-col bg-[#2a2a2a] max-w-md mx-auto">
       {/* Header */}
-      <header className="bg-[#1e1e1e] border-b border-[#3a3a3a] px-3 py-1.5">
+      <header className="bg-[#1e1e1e] border-b border-[#3a3a3a] px-4 py-3">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xs font-semibold text-white">Projection Mapping</h1>
-            <p className="text-[9px] text-gray-400">Cinema 4D Plugin</p>
+            <h1 className="text-sm font-semibold text-white">Projection Mapping</h1>
+            <p className="text-xs text-gray-400">Cinema 4D Plugin</p>
           </div>
-          <Settings className="text-gray-400" size={16} />
+          <Settings className="text-gray-400" size={20} />
         </div>
       </header>
 
       <div className="flex-1 overflow-auto">
-        <div className="space-y-2 p-2">
+        <div className="space-y-3 p-4">
           
           {/* Projector Selection */}
-          <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-2">
-            <h2 className="text-[10px] font-semibold text-white mb-2 flex items-center gap-1.5">
-              <span className="w-0.5 h-2.5 bg-blue-500 rounded"></span>
+          <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-3">
+            <h2 className="text-xs font-semibold text-white mb-3 flex items-center gap-2">
+              <span className="w-0.5 h-4 bg-blue-500 rounded"></span>
               Projecteur
             </h2>
             
-            <div className="space-y-2">
+            <div className="space-y-3">
               {/* Projector Name */}
               <div>
-                <label className="block text-[9px] text-gray-400 mb-1">Nom</label>
-                <div className="flex gap-1">
+                <label className="block text-xs text-gray-400 mb-1.5">Nom</label>
+                <div className="flex gap-2">
                   <input
                     type="text"
                     value={projectorName}
                     onChange={(e) => setProjectorName(e.target.value)}
-                    className="flex-1 bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-1 text-[10px] text-white focus:outline-none focus:border-blue-500"
+                    className="flex-1 bg-[#2a2a2a] border border-[#3a3a3a] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
                   />
-                  <button className="bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-1 hover:bg-[#3a3a3a] transition-colors">
-                    <ChevronLeft className="text-gray-400" size={12} />
+                  <button className="bg-[#2a2a2a] border border-[#3a3a3a] rounded px-3 py-2 hover:bg-[#3a3a3a] transition-colors">
+                    <ChevronLeft className="text-gray-400" size={16} />
                   </button>
-                  <button className="bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-1 hover:bg-[#3a3a3a] transition-colors">
-                    <ChevronRight className="text-gray-400" size={12} />
+                  <button className="bg-[#2a2a2a] border border-[#3a3a3a] rounded px-3 py-2 hover:bg-[#3a3a3a] transition-colors">
+                    <ChevronRight className="text-gray-400" size={16} />
                   </button>
                 </div>
               </div>
 
               {/* Brand Selection */}
               <div>
-                <label className="block text-[9px] text-gray-400 mb-1">Marque</label>
+                <label className="block text-xs text-gray-400 mb-1.5">Marque</label>
                 <div className="relative">
                   <select
                     value={selectedBrand?.id || ''}
                     onChange={(e) => handleBrandChange(e.target.value)}
-                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-1 text-[10px] text-white appearance-none cursor-pointer focus:outline-none focus:border-blue-500"
+                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-3 py-2 text-sm text-white appearance-none cursor-pointer focus:outline-none focus:border-blue-500"
                   >
                     <option value="">Choisir...</option>
                     {BRANDS_DATA.map(brand => (
                       <option key={brand.id} value={brand.id}>{brand.name}</option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={12} />
+                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={16} />
                 </div>
               </div>
 
               {/* Projector Model Selection */}
               <div>
-                <label className="block text-[9px] text-gray-400 mb-1">Modèle</label>
+                <label className="block text-xs text-gray-400 mb-1.5">Modèle</label>
                 <div className="relative">
                   <select
                     value={selectedProjector?.id || ''}
                     onChange={(e) => handleProjectorChange(e.target.value)}
                     disabled={!selectedBrand}
-                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-1 text-[10px] text-white appearance-none cursor-pointer focus:outline-none focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-3 py-2 text-sm text-white appearance-none cursor-pointer focus:outline-none focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <option value="">Choisir...</option>
                     {selectedBrand?.projectors.map(projector => (
                       <option key={projector.id} value={projector.id}>{projector.name}</option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={12} />
+                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={16} />
                 </div>
               </div>
 
               {/* Lens Selection */}
               <div>
-                <label className="block text-[9px] text-gray-400 mb-1">Lentille</label>
+                <label className="block text-xs text-gray-400 mb-1.5">Lentille</label>
                 <div className="relative">
                   <select
                     value={selectedLens?.id || ''}
                     onChange={(e) => handleLensChange(e.target.value)}
                     disabled={!selectedProjector}
-                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-1 text-[10px] text-white appearance-none cursor-pointer focus:outline-none focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-3 py-2 text-sm text-white appearance-none cursor-pointer focus:outline-none focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <option value="">Choisir...</option>
                     {selectedProjector?.lenses.map(lens => (
                       <option key={lens.id} value={lens.id}>{lens.name}</option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={12} />
+                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={16} />
                 </div>
               </div>
             </div>
@@ -287,36 +287,36 @@ export function ProjectorManager() {
 
           {/* Projector Specs */}
           {showSpecs && selectedProjector && (
-            <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-2">
-              <div className="flex items-center justify-between mb-2">
-                <h2 className="text-[10px] font-semibold text-white flex items-center gap-1.5">
-                  <span className="w-0.5 h-2.5 bg-green-500 rounded"></span>
+            <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-3">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-xs font-semibold text-white flex items-center gap-2">
+                  <span className="w-0.5 h-4 bg-green-500 rounded"></span>
                   Spécifications
                 </h2>
                 <button
                   onClick={() => setShowSpecs(false)}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  <EyeOff size={12} />
+                  <EyeOff size={14} />
                 </button>
               </div>
               
-              <div className="space-y-1.5">
-                <div className="flex justify-between items-center text-[9px]">
+              <div className="space-y-2">
+                <div className="flex justify-between items-center text-xs py-1.5">
                   <span className="text-gray-400">Résolution</span>
                   <span className="text-white font-medium">{selectedProjector.resolution}</span>
                 </div>
-                <div className="flex justify-between items-center text-[9px]">
+                <div className="flex justify-between items-center text-xs py-1.5">
                   <span className="text-gray-400">Luminosité</span>
                   <span className="text-white font-medium">{selectedProjector.brightness}</span>
                 </div>
                 {selectedLens && (
                   <>
-                    <div className="flex justify-between items-center text-[9px]">
+                    <div className="flex justify-between items-center text-xs py-1.5">
                       <span className="text-gray-400">Throw Ratio</span>
                       <span className="text-white font-medium">{selectedLens.throwRatio}</span>
                     </div>
-                    <div className="flex justify-between items-center text-[9px]">
+                    <div className="flex justify-between items-center text-xs py-1.5">
                       <span className="text-gray-400">Zoom</span>
                       <span className="text-white font-medium">{selectedLens.zoomRange}</span>
                     </div>
@@ -327,77 +327,77 @@ export function ProjectorManager() {
           )}
 
           {/* Image Parameters */}
-          <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-2">
-            <h2 className="text-[10px] font-semibold text-white mb-2 flex items-center gap-1.5">
-              <span className="w-0.5 h-2.5 bg-purple-500 rounded"></span>
+          <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-3">
+            <h2 className="text-xs font-semibold text-white mb-3 flex items-center gap-2">
+              <span className="w-0.5 h-4 bg-purple-500 rounded"></span>
               Paramètres
             </h2>
             
-            <div className="space-y-2">
-              <div className="grid grid-cols-2 gap-2">
+            <div className="space-y-3">
+              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[9px] text-gray-400 mb-1">Largeur (mm)</label>
+                  <label className="block text-xs text-gray-400 mb-1.5">Largeur (mm)</label>
                   <input
                     type="number"
                     value={imageWidth}
                     onChange={(e) => setImageWidth(Number(e.target.value))}
-                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-1 text-[10px] text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-[9px] text-gray-400 mb-1">Hauteur (mm)</label>
+                  <label className="block text-xs text-gray-400 mb-1.5">Hauteur (mm)</label>
                   <input
                     type="number"
                     value={imageHeight}
                     onChange={(e) => setImageHeight(Number(e.target.value))}
-                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-1 text-[10px] text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
                   />
                 </div>
               </div>
               
               <div>
-                <label className="block text-[9px] text-gray-400 mb-1">Distance (mm)</label>
+                <label className="block text-xs text-gray-400 mb-1.5">Distance (mm)</label>
                 <input
                   type="number"
                   value={distance}
                   onChange={(e) => setDistance(Number(e.target.value))}
-                  className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-1 text-[10px] text-white focus:outline-none focus:border-blue-500"
+                  className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
                 />
               </div>
               
               <div>
-                <label className="block text-[9px] text-gray-400 mb-1">Texture</label>
+                <label className="block text-xs text-gray-400 mb-1.5">Texture</label>
                 <input
                   type="text"
                   value={texturePath}
                   onChange={(e) => setTexturePath(e.target.value)}
                   placeholder="Chemin de la texture..."
-                  className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-1 text-[10px] text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500"
+                  className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-3 py-2 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500"
                 />
               </div>
             </div>
 
-            <div className="mt-1.5 flex items-center gap-1 text-[9px] text-gray-400">
-              <Info size={10} />
+            <div className="mt-2 flex items-center gap-1.5 text-xs text-gray-400">
+              <Info size={12} />
               <span>Ratio: {aspectRatio}:1</span>
             </div>
           </section>
 
           {/* Light Parameters */}
-          <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-2">
-            <h2 className="text-[10px] font-semibold text-white mb-2 flex items-center gap-1.5">
-              <span className="w-0.5 h-2.5 bg-amber-500 rounded"></span>
-              <Lightbulb size={10} className="text-amber-400" />
+          <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-3">
+            <h2 className="text-xs font-semibold text-white mb-3 flex items-center gap-2">
+              <span className="w-0.5 h-4 bg-amber-500 rounded"></span>
+              <Lightbulb size={12} className="text-amber-400" />
               Lumière
             </h2>
             
-            <div className="space-y-2">
+            <div className="space-y-3">
               {/* Light Intensity */}
               <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="text-[9px] text-gray-400">Intensité</label>
-                  <span className="text-[9px] text-white font-mono">{lightIntensity}%</span>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs text-gray-400">Intensité</label>
+                  <span className="text-xs text-white font-mono">{lightIntensity}%</span>
                 </div>
                 <input
                   type="range"
@@ -405,39 +405,39 @@ export function ProjectorManager() {
                   max="100"
                   value={lightIntensity}
                   onChange={(e) => setLightIntensity(Number(e.target.value))}
-                  className="w-full h-1 accent-amber-500"
+                  className="w-full h-1.5 accent-amber-500"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-3">
                 {/* Light Color */}
                 <div>
-                  <label className="block text-[9px] text-gray-400 mb-1">Couleur</label>
-                  <div className="flex gap-1">
+                  <label className="block text-xs text-gray-400 mb-1.5">Couleur</label>
+                  <div className="flex gap-2">
                     <input
                       type="color"
                       value={lightColor}
                       onChange={(e) => setLightColor(e.target.value)}
-                      className="w-8 h-6 bg-[#2a2a2a] border border-[#3a3a3a] rounded cursor-pointer"
+                      className="w-10 h-9 bg-[#2a2a2a] border border-[#3a3a3a] rounded cursor-pointer"
                     />
                     <input
                       type="text"
                       value={lightColor}
                       onChange={(e) => setLightColor(e.target.value)}
-                      className="flex-1 bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-1 text-[10px] text-white font-mono focus:outline-none focus:border-blue-500"
+                      className="flex-1 bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-2 text-xs text-white font-mono focus:outline-none focus:border-blue-500"
                     />
                   </div>
                 </div>
 
                 {/* Color Temperature */}
                 <div>
-                  <label className="block text-[9px] text-gray-400 mb-1">Temp. (K)</label>
+                  <label className="block text-xs text-gray-400 mb-1.5">Temp. (K)</label>
                   <input
                     type="number"
                     value={lightTemperature}
                     onChange={(e) => setLightTemperature(Number(e.target.value))}
                     step="100"
-                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-2 py-1 text-[10px] text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
                   />
                 </div>
               </div>
@@ -446,26 +446,26 @@ export function ProjectorManager() {
 
           {/* Lens Adjustments */}
           {showAdvanced && selectedLens && (
-            <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-2">
-              <div className="flex items-center justify-between mb-2">
-                <h2 className="text-[10px] font-semibold text-white flex items-center gap-1.5">
-                  <span className="w-0.5 h-2.5 bg-orange-500 rounded"></span>
+            <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-3">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-xs font-semibold text-white flex items-center gap-2">
+                  <span className="w-0.5 h-4 bg-orange-500 rounded"></span>
                   Réglages
                 </h2>
                 <button
                   onClick={() => setShowAdvanced(false)}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  <EyeOff size={12} />
+                  <EyeOff size={14} />
                 </button>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {/* Shift Vertical */}
                 <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <label className="text-[9px] text-gray-400">Shift V</label>
-                    <span className="text-[9px] text-white font-mono">{shiftVertical}%</span>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-xs text-gray-400">Shift Vertical</label>
+                    <span className="text-xs text-white font-mono">{shiftVertical}%</span>
                   </div>
                   <input
                     type="range"
@@ -473,15 +473,15 @@ export function ProjectorManager() {
                     max="100"
                     value={shiftVertical}
                     onChange={(e) => setShiftVertical(Number(e.target.value))}
-                    className="w-full h-1 accent-blue-500"
+                    className="w-full h-1.5 accent-blue-500"
                   />
                 </div>
 
                 {/* Shift Horizontal */}
                 <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <label className="text-[9px] text-gray-400">Shift H</label>
-                    <span className="text-[9px] text-white font-mono">{shiftHorizontal}%</span>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-xs text-gray-400">Shift Horizontal</label>
+                    <span className="text-xs text-white font-mono">{shiftHorizontal}%</span>
                   </div>
                   <input
                     type="range"
@@ -489,15 +489,15 @@ export function ProjectorManager() {
                     max="100"
                     value={shiftHorizontal}
                     onChange={(e) => setShiftHorizontal(Number(e.target.value))}
-                    className="w-full h-1 accent-blue-500"
+                    className="w-full h-1.5 accent-blue-500"
                   />
                 </div>
 
                 {/* Zoom */}
                 <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <label className="text-[9px] text-gray-400">Zoom</label>
-                    <span className="text-[9px] text-white font-mono">{zoom}%</span>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-xs text-gray-400">Zoom</label>
+                    <span className="text-xs text-white font-mono">{zoom}%</span>
                   </div>
                   <input
                     type="range"
@@ -505,7 +505,7 @@ export function ProjectorManager() {
                     max="150"
                     value={zoom}
                     onChange={(e) => setZoom(Number(e.target.value))}
-                    className="w-full h-1 accent-blue-500"
+                    className="w-full h-1.5 accent-blue-500"
                   />
                 </div>
               </div>
@@ -514,39 +514,39 @@ export function ProjectorManager() {
 
           {/* Calculations & Feasibility */}
           {showCalculations && projectionSize && (
-            <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-2">
-              <div className="flex items-center justify-between mb-2">
-                <h2 className="text-[10px] font-semibold text-white flex items-center gap-1.5">
-                  <span className="w-0.5 h-2.5 bg-cyan-500 rounded"></span>
+            <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-3">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-xs font-semibold text-white flex items-center gap-2">
+                  <span className="w-0.5 h-4 bg-cyan-500 rounded"></span>
                   Calculs
                 </h2>
                 <button
                   onClick={() => setShowCalculations(false)}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  <EyeOff size={12} />
+                  <EyeOff size={14} />
                 </button>
               </div>
               
-              <div className="space-y-1.5">
-                <div className="bg-[#2a2a2a] rounded p-1.5">
-                  <p className="text-[9px] text-gray-400 mb-1">Taille Projetée</p>
-                  <div className="space-y-1">
-                    <div className="flex justify-between items-center text-[9px]">
-                      <span className="text-gray-300">L:</span>
+              <div className="space-y-2">
+                <div className="bg-[#2a2a2a] rounded p-2.5">
+                  <p className="text-xs text-gray-400 mb-2">Taille Projetée</p>
+                  <div className="space-y-1.5">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-gray-300">Largeur:</span>
                       <span className="text-white font-mono font-semibold">{projectionSize.width} mm</span>
                     </div>
-                    <div className="flex justify-between items-center text-[9px]">
-                      <span className="text-gray-300">H:</span>
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-gray-300">Hauteur:</span>
                       <span className="text-white font-mono font-semibold">{projectionSize.height} mm</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between bg-[#2a2a2a] rounded p-1.5">
-                  <span className="text-[9px] text-gray-300">Status:</span>
-                  <span className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-green-500/20 text-green-400 rounded text-[9px] font-medium">
-                    <span className="w-1 h-1 bg-green-400 rounded-full"></span>
+                <div className="flex items-center justify-between bg-[#2a2a2a] rounded p-2.5">
+                  <span className="text-xs text-gray-300">Status:</span>
+                  <span className="inline-flex items-center gap-1.5 px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs font-medium">
+                    <span className="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
                     Faisable
                   </span>
                 </div>
@@ -555,40 +555,40 @@ export function ProjectorManager() {
           )}
 
           {/* Display Options */}
-          <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-2">
-            <h2 className="text-[10px] font-semibold text-white mb-2 flex items-center gap-1.5">
-              <span className="w-0.5 h-2.5 bg-yellow-500 rounded"></span>
+          <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-3">
+            <h2 className="text-xs font-semibold text-white mb-3 flex items-center gap-2">
+              <span className="w-0.5 h-4 bg-yellow-500 rounded"></span>
               Affichage Viewport
             </h2>
             
-            <div className="space-y-1.5">
-              <label className="flex items-center justify-between px-2 py-1 bg-[#2a2a2a] rounded cursor-pointer hover:bg-[#333333] transition-colors">
-                <span className="text-[9px] text-gray-300">Cône de Projection</span>
+            <div className="space-y-2">
+              <label className="flex items-center justify-between px-3 py-2 bg-[#2a2a2a] rounded cursor-pointer hover:bg-[#333333] transition-colors">
+                <span className="text-xs text-gray-300">Cône de Projection</span>
                 <input
                   type="checkbox"
                   checked={showCone}
                   onChange={(e) => setShowCone(e.target.checked)}
-                  className="accent-blue-500"
+                  className="w-4 h-4 accent-blue-500"
                 />
               </label>
               
-              <label className="flex items-center justify-between px-2 py-1 bg-[#2a2a2a] rounded cursor-pointer hover:bg-[#333333] transition-colors">
-                <span className="text-[9px] text-gray-300">Range de Zoom</span>
+              <label className="flex items-center justify-between px-3 py-2 bg-[#2a2a2a] rounded cursor-pointer hover:bg-[#333333] transition-colors">
+                <span className="text-xs text-gray-300">Range de Zoom</span>
                 <input
                   type="checkbox"
                   checked={showZoomRange}
                   onChange={(e) => setShowZoomRange(e.target.checked)}
-                  className="accent-blue-500"
+                  className="w-4 h-4 accent-blue-500"
                 />
               </label>
               
-              <label className="flex items-center justify-between px-2 py-1 bg-[#2a2a2a] rounded cursor-pointer hover:bg-[#333333] transition-colors">
-                <span className="text-[9px] text-gray-300">Visibilité Caméra</span>
+              <label className="flex items-center justify-between px-3 py-2 bg-[#2a2a2a] rounded cursor-pointer hover:bg-[#333333] transition-colors">
+                <span className="text-xs text-gray-300">Visibilité Caméra</span>
                 <input
                   type="checkbox"
                   checked={cameraVisible}
                   onChange={(e) => setCameraVisible(e.target.checked)}
-                  className="accent-blue-500"
+                  className="w-4 h-4 accent-blue-500"
                 />
               </label>
             </div>
@@ -596,41 +596,41 @@ export function ProjectorManager() {
 
           {/* Formula Info */}
           {showFormulas && selectedLens && (
-            <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-2">
-              <div className="flex items-center justify-between mb-2">
-                <h2 className="text-[10px] font-semibold text-white flex items-center gap-1.5">
-                  <span className="w-0.5 h-2.5 bg-pink-500 rounded"></span>
+            <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-3">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-xs font-semibold text-white flex items-center gap-2">
+                  <span className="w-0.5 h-4 bg-pink-500 rounded"></span>
                   Formules
                 </h2>
                 <button
                   onClick={() => setShowFormulas(false)}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  <EyeOff size={12} />
+                  <EyeOff size={14} />
                 </button>
               </div>
               
-              <div className="space-y-2">
-                <div className="bg-[#2a2a2a] rounded p-2">
-                  <p className="text-[9px] text-gray-400 mb-1">Throw Distance</p>
-                  <code className="text-[9px] text-cyan-400 font-mono block">
+              <div className="space-y-3">
+                <div className="bg-[#2a2a2a] rounded p-3">
+                  <p className="text-xs text-gray-400 mb-2">Throw Distance</p>
+                  <code className="text-xs text-cyan-400 font-mono block">
                     D = W × TR × (Z / 100)
                   </code>
-                  <p className="text-[8px] text-gray-500 mt-1">
+                  <p className="text-[10px] text-gray-500 mt-2">
                     D: Distance, W: Largeur, TR: Throw Ratio, Z: Zoom
                   </p>
                 </div>
 
-                <div className="bg-[#2a2a2a] rounded p-2">
-                  <p className="text-[9px] text-gray-400 mb-1">Largeur Projetée</p>
-                  <code className="text-[9px] text-cyan-400 font-mono block">
+                <div className="bg-[#2a2a2a] rounded p-3">
+                  <p className="text-xs text-gray-400 mb-2">Largeur Projetée</p>
+                  <code className="text-xs text-cyan-400 font-mono block">
                     W = D / (TR × (Z / 100))
                   </code>
                 </div>
 
-                <div className="bg-[#2a2a2a] rounded p-2">
-                  <p className="text-[9px] text-gray-400 mb-1">Hauteur Projetée</p>
-                  <code className="text-[9px] text-cyan-400 font-mono block">
+                <div className="bg-[#2a2a2a] rounded p-3">
+                  <p className="text-xs text-gray-400 mb-2">Hauteur Projetée</p>
+                  <code className="text-xs text-cyan-400 font-mono block">
                     H = W / AspectRatio
                   </code>
                 </div>
@@ -639,59 +639,59 @@ export function ProjectorManager() {
           )}
 
           {/* Sections Toggle */}
-          <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-2">
-            <h2 className="text-[10px] font-semibold text-white mb-2 flex items-center gap-1.5">
-              <span className="w-0.5 h-2.5 bg-gray-500 rounded"></span>
+          <section className="bg-[#1e1e1e] border border-[#3a3a3a] rounded p-3">
+            <h2 className="text-xs font-semibold text-white mb-3 flex items-center gap-2">
+              <span className="w-0.5 h-4 bg-gray-500 rounded"></span>
               Sections
             </h2>
             
-            <div className="space-y-1">
+            <div className="space-y-2">
               <button
                 onClick={() => setShowSpecs(!showSpecs)}
-                className={`w-full flex items-center justify-between px-2 py-1 rounded text-[9px] font-medium transition-colors ${
+                className={`w-full flex items-center justify-between px-3 py-2 rounded text-xs font-medium transition-colors ${
                   showSpecs 
                     ? 'bg-blue-500 text-white' 
                     : 'bg-[#2a2a2a] text-gray-400 hover:text-white'
                 }`}
               >
                 <span>Spécifications</span>
-                {showSpecs ? <Eye size={10} /> : <EyeOff size={10} />}
+                {showSpecs ? <Eye size={14} /> : <EyeOff size={14} />}
               </button>
               
               <button
                 onClick={() => setShowAdvanced(!showAdvanced)}
-                className={`w-full flex items-center justify-between px-2 py-1 rounded text-[9px] font-medium transition-colors ${
+                className={`w-full flex items-center justify-between px-3 py-2 rounded text-xs font-medium transition-colors ${
                   showAdvanced 
                     ? 'bg-blue-500 text-white' 
                     : 'bg-[#2a2a2a] text-gray-400 hover:text-white'
                 }`}
               >
                 <span>Réglages Avancés</span>
-                {showAdvanced ? <Eye size={10} /> : <EyeOff size={10} />}
+                {showAdvanced ? <Eye size={14} /> : <EyeOff size={14} />}
               </button>
               
               <button
                 onClick={() => setShowCalculations(!showCalculations)}
-                className={`w-full flex items-center justify-between px-2 py-1 rounded text-[9px] font-medium transition-colors ${
+                className={`w-full flex items-center justify-between px-3 py-2 rounded text-xs font-medium transition-colors ${
                   showCalculations 
                     ? 'bg-blue-500 text-white' 
                     : 'bg-[#2a2a2a] text-gray-400 hover:text-white'
                 }`}
               >
                 <span>Calculs</span>
-                {showCalculations ? <Eye size={10} /> : <EyeOff size={10} />}
+                {showCalculations ? <Eye size={14} /> : <EyeOff size={14} />}
               </button>
               
               <button
                 onClick={() => setShowFormulas(!showFormulas)}
-                className={`w-full flex items-center justify-between px-2 py-1 rounded text-[9px] font-medium transition-colors ${
+                className={`w-full flex items-center justify-between px-3 py-2 rounded text-xs font-medium transition-colors ${
                   showFormulas 
                     ? 'bg-blue-500 text-white' 
                     : 'bg-[#2a2a2a] text-gray-400 hover:text-white'
                 }`}
               >
                 <span>Formules</span>
-                {showFormulas ? <Eye size={10} /> : <EyeOff size={10} />}
+                {showFormulas ? <Eye size={14} /> : <EyeOff size={14} />}
               </button>
             </div>
           </section>
@@ -700,9 +700,9 @@ export function ProjectorManager() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-[#1e1e1e] border-t border-[#3a3a3a] px-3 py-1.5">
+      <footer className="bg-[#1e1e1e] border-t border-[#3a3a3a] px-4 py-2.5">
         <div className="text-center">
-          <span className="text-[9px] text-gray-400 block truncate">
+          <span className="text-xs text-gray-400 block truncate">
             {selectedProjector ? `${selectedBrand?.name} ${selectedProjector.name}` : 'Aucun projecteur'}
           </span>
         </div>
