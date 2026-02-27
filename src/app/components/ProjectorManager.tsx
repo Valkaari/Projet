@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, Settings, Eye, EyeOff, Info, ChevronLeft, ChevronRight, Lightbulb } from 'lucide-react';
+import { ChevronDown, Settings, Eye, EyeOff, Info, ChevronLeft, ChevronRight, Lightbulb, Calculator } from 'lucide-react';
 
 interface Lens {
   id: string;
@@ -135,6 +135,13 @@ export function ProjectorManager() {
   
   // Projector name
   const [projectorName, setProjectorName] = useState('Projecteur 1');
+  
+  // Calculation fields
+  const [calcMode, setCalcMode] = useState<'LW' | 'L' | 'PS' | 'Lux'>('LW');
+  const [projectionWidth, setProjectionWidth] = useState(3000); // LW
+  const [throwDistance, setThrowDistance] = useState(5000); // L
+  const [pixelSize, setPixelSize] = useState(0); // PS
+  const [luxValue, setLuxValue] = useState(0); // Lux
   
   // Display options
   const [showCone, setShowCone] = useState(true);
@@ -518,7 +525,8 @@ export function ProjectorManager() {
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-xs font-semibold text-white flex items-center gap-2">
                   <span className="w-0.5 h-4 bg-cyan-500 rounded"></span>
-                  Calculs
+                  <Calculator size={12} className="text-cyan-400" />
+                  Calculs Avancés
                 </h2>
                 <button
                   onClick={() => setShowCalculations(false)}
@@ -528,28 +536,145 @@ export function ProjectorManager() {
                 </button>
               </div>
               
-              <div className="space-y-2">
-                <div className="bg-[#2a2a2a] rounded p-2.5">
-                  <p className="text-xs text-gray-400 mb-2">Taille Projetée</p>
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between items-center text-xs">
-                      <span className="text-gray-300">Largeur:</span>
-                      <span className="text-white font-mono font-semibold">{projectionSize.width} mm</span>
-                    </div>
-                    <div className="flex justify-between items-center text-xs">
-                      <span className="text-gray-300">Hauteur:</span>
-                      <span className="text-white font-mono font-semibold">{projectionSize.height} mm</span>
-                    </div>
-                  </div>
+              {/* Calculation Mode Selector */}
+              <div className="mb-3">
+                <label className="block text-xs text-gray-400 mb-2">Calculer:</label>
+                <div className="grid grid-cols-4 gap-1">
+                  <button
+                    onClick={() => setCalcMode('LW')}
+                    className={`px-2 py-1.5 rounded text-xs font-medium transition-colors ${
+                      calcMode === 'LW'
+                        ? 'bg-cyan-500 text-white'
+                        : 'bg-[#2a2a2a] text-gray-400 hover:bg-[#333333]'
+                    }`}
+                  >
+                    LW
+                  </button>
+                  <button
+                    onClick={() => setCalcMode('L')}
+                    className={`px-2 py-1.5 rounded text-xs font-medium transition-colors ${
+                      calcMode === 'L'
+                        ? 'bg-cyan-500 text-white'
+                        : 'bg-[#2a2a2a] text-gray-400 hover:bg-[#333333]'
+                    }`}
+                  >
+                    L
+                  </button>
+                  <button
+                    onClick={() => setCalcMode('PS')}
+                    className={`px-2 py-1.5 rounded text-xs font-medium transition-colors ${
+                      calcMode === 'PS'
+                        ? 'bg-cyan-500 text-white'
+                        : 'bg-[#2a2a2a] text-gray-400 hover:bg-[#333333]'
+                    }`}
+                  >
+                    PS
+                  </button>
+                  <button
+                    onClick={() => setCalcMode('Lux')}
+                    className={`px-2 py-1.5 rounded text-xs font-medium transition-colors ${
+                      calcMode === 'Lux'
+                        ? 'bg-cyan-500 text-white'
+                        : 'bg-[#2a2a2a] text-gray-400 hover:bg-[#333333]'
+                    }`}
+                  >
+                    Lux
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {/* LW - Largeur Projection */}
+                <div>
+                  <label className="block text-xs text-gray-400 mb-1.5">
+                    LW - Largeur Projection (mm)
+                    {calcMode === 'LW' && <span className="ml-1 text-cyan-400">→ Calculé</span>}
+                  </label>
+                  <input
+                    type="number"
+                    value={projectionWidth}
+                    onChange={(e) => setProjectionWidth(Number(e.target.value))}
+                    readOnly={calcMode === 'LW'}
+                    className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500 ${
+                      calcMode === 'LW'
+                        ? 'bg-[#1a1a1a] border-cyan-500/50 text-cyan-400 font-mono'
+                        : 'bg-[#2a2a2a] border-[#3a3a3a] text-white'
+                    }`}
+                  />
                 </div>
 
-                <div className="flex items-center justify-between bg-[#2a2a2a] rounded p-2.5">
-                  <span className="text-xs text-gray-300">Status:</span>
-                  <span className="inline-flex items-center gap-1.5 px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs font-medium">
-                    <span className="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
-                    Faisable
-                  </span>
+                {/* L - Distance Throw */}
+                <div>
+                  <label className="block text-xs text-gray-400 mb-1.5">
+                    L - Distance Throw (mm)
+                    {calcMode === 'L' && <span className="ml-1 text-cyan-400">→ Calculé</span>}
+                  </label>
+                  <input
+                    type="number"
+                    value={throwDistance}
+                    onChange={(e) => setThrowDistance(Number(e.target.value))}
+                    readOnly={calcMode === 'L'}
+                    className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500 ${
+                      calcMode === 'L'
+                        ? 'bg-[#1a1a1a] border-cyan-500/50 text-cyan-400 font-mono'
+                        : 'bg-[#2a2a2a] border-[#3a3a3a] text-white'
+                    }`}
+                  />
                 </div>
+
+                {/* PS - Pixel Size */}
+                <div>
+                  <label className="block text-xs text-gray-400 mb-1.5">
+                    PS - Pixel Size (mm)
+                    {calcMode === 'PS' && <span className="ml-1 text-cyan-400">→ Calculé</span>}
+                  </label>
+                  <input
+                    type="number"
+                    value={pixelSize.toFixed(3)}
+                    onChange={(e) => setPixelSize(Number(e.target.value))}
+                    readOnly={calcMode === 'PS'}
+                    step="0.001"
+                    className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500 ${
+                      calcMode === 'PS'
+                        ? 'bg-[#1a1a1a] border-cyan-500/50 text-cyan-400 font-mono'
+                        : 'bg-[#2a2a2a] border-[#3a3a3a] text-white'
+                    }`}
+                  />
+                </div>
+
+                {/* Lux - Luminosité */}
+                <div>
+                  <label className="block text-xs text-gray-400 mb-1.5">
+                    Lux - Luminosité sur surface (lux)
+                    {calcMode === 'Lux' && <span className="ml-1 text-cyan-400">→ Calculé</span>}
+                  </label>
+                  <input
+                    type="number"
+                    value={luxValue.toFixed(2)}
+                    onChange={(e) => setLuxValue(Number(e.target.value))}
+                    readOnly={calcMode === 'Lux'}
+                    step="0.01"
+                    className={`w-full border rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500 ${
+                      calcMode === 'Lux'
+                        ? 'bg-[#1a1a1a] border-cyan-500/50 text-cyan-400 font-mono'
+                        : 'bg-[#2a2a2a] border-[#3a3a3a] text-white'
+                    }`}
+                  />
+                </div>
+              </div>
+
+              <div className="mt-3 p-2 bg-cyan-500/10 border border-cyan-500/30 rounded">
+                <p className="text-[10px] text-cyan-300">
+                  <strong>Mode:</strong> Les champs en lecture seule sont calculés automatiquement selon le mode sélectionné.
+                </p>
+              </div>
+
+              <div className="mt-2 flex items-center justify-between bg-[#2a2a2a] rounded p-2.5">
+                <span className="text-xs text-gray-300">Status:</span>
+                <span className="inline-flex items-center gap-1.5 px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs font-medium">
+                  <span className="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+                  Faisable
+                </span>
               </div>
             </section>
           )}
